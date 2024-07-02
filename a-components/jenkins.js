@@ -3,6 +3,8 @@ import "aframe";
 export const registerJenkins = () => {
 	AFRAME.registerComponent("jenkins", {
 		init() {
+			this.hand = null;
+			this.head = null;
 			this.sceneEl = document.querySelector("a-scene");
 			this.hi = this.hi.bind(this);
 			this.bue = this.bue.bind(this);
@@ -44,7 +46,12 @@ export const registerJenkins = () => {
 				if (child.name === "mixamorigRightHand") {
 					this.hand = child;
 
-					this.hand.rotation.x += 4;
+					this.hand.rotation.x += 3;
+				}
+				if (child.name === "mixamorigNeck") {
+					this.head = child;
+
+					this.head.rotation.x += 1;
 				}
 			});
 		},
@@ -60,7 +67,13 @@ export const registerJenkins = () => {
 				if (child.name === "mixamorigRightHand") {
 					this.hand = child;
 
-					this.hand.rotation.x -= 4;
+					this.hand.rotation.x -= 3;
+				}
+
+				if (child.name === "mixamorigNeck") {
+					this.head = child;
+
+					this.head.rotation.x -= 1;
 				}
 			});
 		},
