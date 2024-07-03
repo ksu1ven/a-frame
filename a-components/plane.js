@@ -50,7 +50,7 @@ export const registerPlane = (screenX, screenY) => {
 					model.setAttribute("jenkins", true);
 					model.setAttribute("levitate", true);
 					model.setAttribute("draggable", true);
-					model.setAttribute("animation-mixer", "clip: *");
+					model.setAttribute("shadow", "cast: true");
 					this.sceneEl.appendChild(model);
 				}
 			}

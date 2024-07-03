@@ -8,7 +8,7 @@
 		<script type="module" src="/main.js"></script>
 	</head>
 	<body>
-		<a-scene>
+		<a-scene shadow="type: pcfsoft">
 			<a-assets>
 				<a-asset-item
 					id="jenkinsModel"
@@ -27,14 +27,15 @@
 
 			<a-entity
 				sphere
+				shadow="cast: true"
 				geometry="primitive: sphere; radius: 1"
 				position="0 1 -5"
-				light="type: ambient; color: white; intensity: 2"
 			></a-entity>
 
 			<a-box
 				music-box
-				position="2 0 -2"
+				shadow="cast:true"
+				position="1.5 0.5 -2"
 				width="0.5"
 				height="0.5"
 				depth="0.5"
@@ -44,26 +45,25 @@
 
 			<a-plane
 				plane
+				shadow="receive:true"
 				position="0 0 -4"
 				rotation="-90 0 0"
 				width="5"
 				height="5"
-				color="#7BC8A4"
+				material="opacity: 0.2; transparent: true;"
 				class="raycastable"
 			></a-plane>
 			<a-sky src="#skyTexture"></a-sky>
 
 			<a-entity sound="src: #rock" id="sound"></a-entity>
 
-			<a-light
-				type="directional"
-				light="castShadow:true;"
-				position="1 1 1"
-				intensity="2"
-			></a-light>
+			<a-entity
+				light="type: directional; castShadow: true;"
+				position="5 5 7"
+			></a-entity>
 
 			<a-camera
-				cursor="fuse: false; rayOrigin:mouse"
+				cursor="fuse: false; rayOrigin:mouse;"
 				raycaster="objects: .raycastable"
 			>
 			</a-camera>
