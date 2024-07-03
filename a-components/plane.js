@@ -45,7 +45,7 @@ export const registerPlane = (screenX, screenY) => {
 					model.setAttribute("id", "model");
 					model.setAttribute("gltf-model", "#jenkinsModel");
 					model.setAttribute("position", intersectPoint);
-					model.setAttribute("model-rotation", true);
+					model.setAttribute("rotative", true);
 					model.setAttribute("class", "raycastable");
 					model.setAttribute("jenkins", true);
 					model.setAttribute("levitate", true);

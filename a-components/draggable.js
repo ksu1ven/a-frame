@@ -1,4 +1,6 @@
 import "aframe";
+import { gsap } from "gsap";
+import { guiParams } from "../js/gui";
 
 export const registerDraggable = (screenX, screenY) => {
 	const aPlane = document.querySelector("a-plane");
@@ -25,13 +27,13 @@ export const registerDraggable = (screenX, screenY) => {
 				default: -4 + aPlane.getAttribute("height") / 2,
 			},
 		},
-		init: function () {
+		init() {
 			this.sceneEl = document.querySelector("a-scene");
 
 			this.isDragging = false;
 			this.targetPosition = new THREE.Vector3();
 			this.previousPosition = new THREE.Vector3();
-			this.lerpFactor = 0.1;
+			this.lerpFactor = 0.5;
 
 			this.onMouseDown = this.onMouseDown.bind(this);
 			this.onMouseMove = this.onMouseMove.bind(this);
@@ -98,10 +100,11 @@ export const registerDraggable = (screenX, screenY) => {
 			}
 		},
 		onMouseDown(event) {
-			this.checkCorrectIntersect(event, {
-				x: event.clientX,
-				y: event.clientY,
-			});
+			if (guiParams.modelDraggable)
+				this.checkCorrectIntersect(event, {
+					x: event.clientX,
+					y: event.clientY,
+				});
 		},
 		onMouseMove(event) {
 			if (!this.isDragging) return;
@@ -111,7 +114,7 @@ export const registerDraggable = (screenX, screenY) => {
 			this.isDragging = false;
 		},
 		onTouchStart(event) {
-			if (event.touches.length === 1) {
+			if (event.touches.length === 1 && guiParams.modelDraggable) {
 				this.checkCorrectIntersect(event, {
 					x: event.touches[0].clientX,
 					y: event.touches[0].clientY,
@@ -129,28 +132,29 @@ export const registerDraggable = (screenX, screenY) => {
 		onTouchEnd() {
 			this.isDragging = false;
 		},
-		tick(time, timeDelta) {
+		tick() {
 			if (this.isDragging) {
 				const delta = this.targetPosition
 					.clone()
 					.sub(this.previousPosition);
-				const lerpDelta = delta.multiplyScalar(
-					this.lerpFactor * (timeDelta / 16.67)
-				);
 
-				delta.multiplyScalar(this.lerpFactor);
+				const targetX =
+					this.el.object3D.position.x + delta.x * this.lerpFactor;
+				const targetZ =
+					this.el.object3D.position.z + delta.y * this.lerpFactor;
 
-				const position = this.el.object3D.position;
-
-				position.x = Math.max(
-					this.data.minX,
-					Math.min(this.data.maxX, position.x + lerpDelta.x)
-				);
-
-				position.z = Math.max(
-					this.data.minZ,
-					Math.min(this.data.maxZ, position.z + lerpDelta.y)
-				);
+				gsap.to(this.el.object3D.position, {
+					x: Math.max(
+						this.data.minX,
+						Math.min(this.data.maxX, targetX)
+					),
+					z: Math.max(
+						this.data.minZ,
+						Math.min(this.data.maxZ, targetZ)
+					),
+					duration: 1,
+					ease: "power2.out",
+				});
 
 				this.previousPosition.copy(this.targetPosition);
 			}

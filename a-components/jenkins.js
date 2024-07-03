@@ -36,6 +36,7 @@ export const registerJenkins = () => {
 
 			this.el.addEventListener("model-loaded", () => {
 				guiParams.addRotation();
+				guiParams.addDraggable();
 				guiParams.addGreeting();
 				const model = this.el.object3D;
 

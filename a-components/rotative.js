@@ -1,8 +1,8 @@
 import "aframe";
 import { guiParams } from "../js/gui";
 
-export const registerModelRotation = (screenX, screenY) => {
-	AFRAME.registerComponent("model-rotation", {
+export const registerRotative = (screenX, screenY) => {
+	AFRAME.registerComponent("rotative", {
 		schema: {
 			speed: { type: "number", default: 100 },
 		},

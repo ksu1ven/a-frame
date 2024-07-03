@@ -10,9 +10,11 @@ class GuiParams {
 		};
 		this.sceneMusic = true;
 		this.modelRotation = true;
+		this.modelDraggable = true;
 		this.modelGreeting = false;
 		this.fieldsObject = {
 			rotationButton: true,
+			draggableButton: true,
 			musicButton: true,
 			greetingButton: false,
 		};
@@ -31,6 +33,14 @@ class GuiParams {
 			.name("Rotation of model")
 			.onChange((value) => {
 				this.modelRotation = value;
+			});
+	}
+
+	addDraggable() {
+		gui.add(this.fieldsObject, "draggableButton")
+			.name("Draggability of model")
+			.onChange((value) => {
+				this.modelDraggable = value;
 			});
 	}
 

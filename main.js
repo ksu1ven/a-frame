@@ -2,7 +2,7 @@ import "./style.css";
 
 import { registerPlane } from "./a-components/plane";
 import { registerMusicBox } from "./a-components/music-box";
-import { registerModelRotation } from "./a-components/model-rotation";
+import { registerRotative } from "./a-components/rotative";
 import { registerLevitate } from "./a-components/levitate";
 import { registerDraggable } from "./a-components/draggable";
 import { registerJenkins } from "./a-components/jenkins";
@@ -13,7 +13,7 @@ let screenY = window.innerHeight;
 
 registerPlane(screenX, screenY);
 registerMusicBox();
-registerModelRotation(screenX, screenY);
+registerRotative(screenX, screenY);
 registerLevitate();
 registerDraggable(screenX, screenY);
 registerJenkins();

@@ -14,6 +14,9 @@ export const registerReflective = () => {
 				this.el.sceneEl.object3D
 			);
 		},
+		remove() {
+			this.el.removeEventListener("loaded", this.onLoad);
+		},
 		onLoad() {
 			const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(512, {
 				format: THREE.RGBFormat,
