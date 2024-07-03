@@ -16,6 +16,13 @@
 				></a-asset-item>
 
 				<img id="skyTexture" src="/images/sky.jpg" />
+
+				<audio
+					id="rock"
+					src="/music/bring-me-the-horizon-can-you-feel-my-heart.mp3"
+					preload="auto"
+					loop
+				></audio>
 			</a-assets>
 
 			<a-entity
@@ -45,6 +52,8 @@
 				class="raycastable"
 			></a-plane>
 			<a-sky src="#skyTexture"></a-sky>
+
+			<a-entity sound="src: #rock" id="sound"></a-entity>
 
 			<a-light
 				type="directional"

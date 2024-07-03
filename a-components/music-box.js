@@ -5,7 +5,7 @@ export const registerMusicBox = () => {
 	AFRAME.registerComponent("music-box", {
 		init() {
 			this.sceneEl = document.querySelector("a-scene");
-			this.sound = document.querySelector("a-sound");
+			this.sound = document.querySelector("#sound");
 			this.onClick = this.onClick.bind(this);
 
 			guiParams.addMusic();
@@ -15,31 +15,19 @@ export const registerMusicBox = () => {
 		},
 
 		remove() {
-			if (sound) {
-				this.sound.stop();
+			if (this.sound) {
+				this.sound.components.sound.stopSound();
 			}
-
 			this.el.removeEventListener("click", this.onClick);
 		},
 
 		onClick() {
-			if (!this.sound) {
-				this.sound = document.createElement("a-sound");
-				this.sound.setAttribute(
-					"src",
-					"url(/music/bring-me-the-horizon-can-you-feel-my-heart.mp3)"
-				);
-
+			if (this.sound) {
 				if (guiParams.sceneMusic) {
-					this.sound.setAttribute("autoplay", "true");
-					this.sound.setAttribute("loop", "true");
-					this.sound.setAttribute("volume", "0.5");
-					this.sound.play();
+					this.sound.components.sound.playSound();
 				} else {
-					this.sound.pause();
+					this.sound.components.sound.pauseSound();
 				}
-
-				this.sceneEl.appendChild(this.sound);
 			}
 		},
 	});

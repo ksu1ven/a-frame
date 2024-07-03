@@ -1,14 +1,10 @@
 import "aframe";
-import { guiParams } from "../js/gui";
 
 export const registerPlane = (screenX, screenY) => {
 	AFRAME.registerComponent("plane", {
 		init() {
 			this.sceneEl = document.querySelector("a-scene");
 			this.onClick = this.onClick.bind(this);
-
-			guiParams.addRotation();
-			guiParams.addGreeting();
 
 			this.el.addEventListener("click", this.onClick);
 		},

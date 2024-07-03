@@ -40,13 +40,13 @@ class GuiParams {
 			.onChange((value) => {
 				this.modelGreeting = value;
 				const eventHi = new Event("hi");
-				const eventBy = new Event("bue");
+				const eventBye = new Event("bye");
 				const element = document.querySelector("#model");
 				this.modelRotation = value;
-				if (value) {
+				if (value && element) {
 					element.dispatchEvent(eventHi);
-				} else {
-					element.dispatchEvent(eventBy);
+				} else if (element) {
+					element.dispatchEvent(eventBye);
 				}
 			});
 	}
@@ -57,10 +57,10 @@ class GuiParams {
 			.onChange((value) => {
 				this.sceneMusic = value;
 
-				const sound = document.querySelector("a-sound");
+				const sound = document.querySelector("#sound");
 				if (sound) {
-					if (value) sound.play();
-					else sound.pause();
+					if (value) sound.components.sound.playSound();
+					else sound.components.sound.pauseSound();
 				}
 			});
 	}
