@@ -2,7 +2,7 @@ import "aframe";
 import { gsap } from "gsap";
 import { guiParams } from "../js/gui";
 
-export const registerDraggable = (screenX, screenY) => {
+export const registerDraggable = () => {
 	const aPlane = document.querySelector("a-plane");
 
 	let { x } = aPlane.object3D.position;
@@ -75,11 +75,16 @@ export const registerDraggable = (screenX, screenY) => {
 			const touchEvent = event instanceof TouchEvent;
 
 			if (mouseEvent) {
-				mouse.x = (event.clientX / screenX) * 2 - 1;
-				mouse.y = -(event.clientY / screenY) * 2 + 1;
+				mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+				mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 			} else if (touchEvent) {
-				mouse.x = (event.changedTouches[0].clientX / screenX) * 2 - 1;
-				mouse.y = -(event.changedTouches[0].clientY / screenY) * 2 + 1;
+				mouse.x =
+					(event.changedTouches[0].clientX / window.innerWidth) * 2 -
+					1;
+				mouse.y =
+					-(event.changedTouches[0].clientY / window.innerHeight) *
+						2 +
+					1;
 			}
 
 			const camera = this.sceneEl.camera;

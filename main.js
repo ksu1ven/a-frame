@@ -8,21 +8,13 @@ import { registerDraggable } from "./a-components/draggable";
 import { registerJenkins } from "./a-components/jenkins";
 import { registerReflective } from "./a-components/reflectiveMaterial";
 
-let screenX = window.innerWidth;
-let screenY = window.innerHeight;
-
-registerPlane(screenX, screenY);
+registerPlane();
 registerMusicBox();
-registerRotative(screenX, screenY);
+registerRotative();
 registerLevitate();
-registerDraggable(screenX, screenY);
+registerDraggable();
 registerJenkins();
 registerReflective();
-
-window.addEventListener("resize", (e) => {
-	screenX = window.innerWidth;
-	screenY = window.innerHeight;
-});
 
 window.addEventListener("dblclick", () => {
 	if (!document.fullscreenElement) {

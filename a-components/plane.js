@@ -1,6 +1,6 @@
 import "aframe";
 
-export const registerPlane = (screenX, screenY) => {
+export const registerPlane = () => {
 	AFRAME.registerComponent("plane", {
 		init() {
 			this.sceneEl = document.querySelector("a-scene");
@@ -19,13 +19,20 @@ export const registerPlane = (screenX, screenY) => {
 			const touchEvent = event.detail?.touchEvent;
 
 			if (mouseEvent) {
-				mouse.x = (mouseEvent.clientX / screenX) * 2 - 1;
-				mouse.y = -(mouseEvent.clientY / screenY) * 2 + 1;
+				mouse.x = (mouseEvent.clientX / window.innerWidth) * 2 - 1;
+				mouse.y = -(mouseEvent.clientY / window.innerHeight) * 2 + 1;
 			} else if (touchEvent) {
 				mouse.x =
-					(touchEvent.changedTouches[0].clientX / screenX) * 2 - 1;
+					(touchEvent.changedTouches[0].clientX / window.innerWidth) *
+						2 -
+					1;
 				mouse.y =
-					-(touchEvent.changedTouches[0].clientY / screenY) * 2 + 1;
+					-(
+						touchEvent.changedTouches[0].clientY /
+						window.innerHeight
+					) *
+						2 +
+					1;
 			}
 
 			const camera = this.sceneEl.camera;

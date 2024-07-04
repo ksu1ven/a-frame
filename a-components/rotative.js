@@ -1,7 +1,7 @@
 import "aframe";
 import { guiParams } from "../js/gui";
 
-export const registerRotative = (screenX, screenY) => {
+export const registerRotative = () => {
 	AFRAME.registerComponent("rotative", {
 		schema: {
 			speed: { type: "number", default: 100 },
@@ -51,11 +51,16 @@ export const registerRotative = (screenX, screenY) => {
 			const touchEvent = event instanceof TouchEvent;
 
 			if (mouseEvent) {
-				mouse.x = (event.clientX / screenX) * 2 - 1;
-				mouse.y = -(event.clientY / screenY) * 2 + 1;
+				mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+				mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 			} else if (touchEvent) {
-				mouse.x = (event.changedTouches[0].clientX / screenX) * 2 - 1;
-				mouse.y = -(event.changedTouches[0].clientY / screenY) * 2 + 1;
+				mouse.x =
+					(event.changedTouches[0].clientX / window.innerWidth) * 2 -
+					1;
+				mouse.y =
+					-(event.changedTouches[0].clientY / window.innerHeight) *
+						2 +
+					1;
 			}
 
 			const camera = this.sceneEl.camera;
